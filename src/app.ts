@@ -13,9 +13,12 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("This is our tour backEnd");
 });
+app.get("/tour", (req, res) => {
+  res.send("This is our tour");
+});
 app.get("/api/v1", (req, res) => {
   res.send({
-    name: 'backend',
+    name: "backend",
   });
 });
 

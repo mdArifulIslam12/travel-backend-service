@@ -13,7 +13,7 @@ app.use(express_1.default.json());
 // app.use(cookieParser());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.send("This is our tour backEnd");
 });
 // handle not route
 app.use((req, res, next) => {

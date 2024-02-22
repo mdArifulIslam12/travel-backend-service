@@ -11,7 +11,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("This is our tour backEnd");
+});
+app.get("/api/v1", (req, res) => {
+  res.send({
+    name: 'backend',
+  });
 });
 
 // handle not route

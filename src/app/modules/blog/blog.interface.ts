@@ -8,6 +8,7 @@ export type IBlog = {
 
 export type IBlogFilters = {
   searchTerm?: string;
+  title?: string;
 };
 
 export type IBlogModel = Model<IBlog, Record<string, unknown>>;

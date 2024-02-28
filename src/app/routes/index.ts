@@ -20,7 +20,7 @@ const moduleRoutes = [
     route: authRouter,
   },
   {
-    path: '/create',
+    path: '/tour',
     route: tourRouter,
   },
 ];

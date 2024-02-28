@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { Server } from 'http';
 import mongoose from 'mongoose';
+import seedSuperAdmin from './Db';
 import app from './app';
 import config from './config/index';
 const port = 5000;
@@ -16,6 +17,7 @@ async function bootstrap() {
   try {
     await mongoose.connect(config.database_url as string);
     console.log('Database is connected successfully');
+    seedSuperAdmin();
     server = app.listen(port, () => {
       console.log(`Application listening on port ${port}`);
     });

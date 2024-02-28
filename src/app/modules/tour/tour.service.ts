@@ -1,7 +1,7 @@
 import Tour from './Tour.Model';
-import { TTour } from './Tour.interfact';
+import { ITour } from './Tour.interface';
 
-const createTour = async (payload: TTour) => {
+const createTour = async (payload: ITour) => {
   const result = await Tour.create(payload);
   return result;
 };
@@ -16,7 +16,7 @@ const findSingleDataFromDb = async (id: string) => {
   return result;
 };
 
-const upTour = async (id: string, payload: Partial<TTour>) => {
+const upTour = async (id: string, payload: Partial<ITour>) => {
   const result = await Tour.findByIdAndUpdate(id, payload, {
     new: true,
   });

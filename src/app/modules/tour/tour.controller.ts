@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Request, Response } from 'express';
-import catchAsync from '../../shared/catchAsync';
-import sendResponse from '../../shared/sendResponse';
+import catchAsync from '../../../shared/catchAsync';
+import sendResponse from '../../../shared/sendResponse';
 import { TourService } from './Tour.Service';
 
 const createTour = catchAsync(async (req: Request, res: Response) => {
@@ -12,6 +12,7 @@ const createTour = catchAsync(async (req: Request, res: Response) => {
     statusCode: 201,
     success: true,
     message: 'Tour Tour successful',
+    data: result,
   });
 });
 

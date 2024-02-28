@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { TTour } from './Tour.interfact';
+import { ITour } from './Tour.interface';
 
-const tourSchema = new Schema<TTour>({
+const tourSchema = new Schema<ITour>({
   from: { type: String, required: true },
   to: { type: String, required: true },
   price: { type: Number, required: true },
@@ -11,6 +11,6 @@ const tourSchema = new Schema<TTour>({
   endDate: { type: String, required: true },
 });
 
-const Tour = model<TTour>('Tour', tourSchema);
+const Tour = model<ITour>('Tour', tourSchema);
 
 export default Tour;

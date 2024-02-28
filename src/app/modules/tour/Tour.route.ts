@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import auth from '../../app/middlewares/auth';
-import { USER_ROLE } from '../../role/role';
+import { USER_ROLE } from '../../../role/role';
+import auth from '../../middlewares/auth';
 import { TourController } from './Tour.Controller';
 
 const tourRouter = Router();

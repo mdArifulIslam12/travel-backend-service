@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { Request, Response } from 'express';
+import { paginationFields } from '../../../constants/pagination';
 import catchAsync from '../../../shared/catchAsync';
+import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
 import { TourService } from './Tour.Service';
 
@@ -17,7 +19,9 @@ const createTour = catchAsync(async (req: Request, res: Response) => {
 });
 
 const findDataFromDb = catchAsync(async (req: Request, res: Response) => {
-  const result = await TourService.findDataFromDb();
+  const paginationOptions = pick(req.query, paginationFields);
+
+  const result = await TourService.findDataFromDb(paginationOptions);
   sendResponse(res, {
     statusCode: 200,
     success: true,

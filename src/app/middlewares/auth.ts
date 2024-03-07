@@ -3,8 +3,8 @@ import httpStatus from 'http-status';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from '../../config';
 import ApiError from '../../errors/ApiError';
-import { Register } from '../../module/User/Register/register.model';
 import { USER_ROLE } from '../../role/role';
+import { Register } from '../modules/User/Register/register.model';
 
 type TUserRole = keyof typeof USER_ROLE;
 

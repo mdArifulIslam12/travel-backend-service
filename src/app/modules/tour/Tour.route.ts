@@ -1,14 +1,12 @@
 import { Router } from 'express';
-import { USER_ROLE } from '../../../role/role';
-import auth from '../../middlewares/auth';
 import { TourController } from './Tour.Controller';
 
 const tourRouter = Router();
 
-tourRouter.post(
-  '/tour',
-  auth(USER_ROLE.admin, USER_ROLE.superAdmin),
-  TourController.createTour,
-);
+tourRouter.post('/create-tour', TourController.createTour);
+tourRouter.get('/', TourController.findDataFromDb);
+tourRouter.get('/:id', TourController.findSingleDataFromDb);
+tourRouter.patch('/:id', TourController.findSingleDataFromDb);
+tourRouter.delete('/:id', TourController.findSingleDataFromDb);
 
 export default tourRouter;

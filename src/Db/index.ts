@@ -1,4 +1,4 @@
-import { Register } from '../module/User/Register/register.model';
+import { Register } from '../app/modules/User/Register/register.model';
 import { USER_ROLE } from '../role/role';
 
 const superAdminData = {

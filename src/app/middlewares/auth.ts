@@ -1,12 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { Secret } from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from '../../config';
 import ApiError from '../../errors/ApiError';
-import { jwtHelpers } from '../../helpers/jwtHelpers';
+import { USER_ROLE } from '../../role/role';
+import { Register } from '../modules/User/Register/register.model';
+
+type TUserRole = keyof typeof USER_ROLE;
 
 const auth =
-  (...requiredRoles: string[]) =>
+  (...requiredRoles: TUserRole[]) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       //get authorization token
@@ -15,16 +18,27 @@ const auth =
         throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
       }
       // verify token
-      let verifiedUser = null;
-
-      verifiedUser = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
-
-      req.user = verifiedUser; // role  , userid
-
-      // role diye guard korar jnno
-      if (requiredRoles.length && !requiredRoles.includes(verifiedUser.role)) {
-        throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
+      const decoded = jwt.verify(
+        token,
+        config.jwt.secret as string,
+      ) as JwtPayload;
+      console.log('decoded compoonent', decoded);
+      const { name, email, role } = decoded as JwtPayload;
+      const isExistName = await Register.findOne({ name });
+      const isExistEmail = await Register.findOne({ email });
+      if (!isExistName) {
+        throw new Error('Unauthorize user check your name');
       }
+
+      if (!isExistEmail) {
+        throw new Error('Unauthorize user check your email');
+      }
+
+      if (requiredRoles && !requiredRoles.includes(role)) {
+        throw new Error('Unauthorize user do not match role');
+      }
+
+      req.user = decoded as JwtPayload;
       next();
     } catch (error) {
       next(error);

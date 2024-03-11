@@ -31,8 +31,10 @@ const findDataFromDb = catchAsync(async (req: Request, res: Response) => {
 });
 
 const findSingleDataFromDb = catchAsync(async (req: Request, res: Response) => {
-  const id = req.params.TourId;
+  const id = req.params.id;
+
   const result = await TourService.findSingleDataFromDb(id);
+
   sendResponse(res, {
     statusCode: 200,
     success: true,

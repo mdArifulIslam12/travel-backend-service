@@ -26,7 +26,8 @@ const findDataFromDb = catchAsync(async (req: Request, res: Response) => {
     statusCode: 200,
     success: true,
     message: 'Tour retrived successful',
-    data: result,
+    meta: result.meta,
+    data: result.data,
   });
 });
 
@@ -34,7 +35,7 @@ const findSingleDataFromDb = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
 
   const result = await TourService.findSingleDataFromDb(id);
-
+  console.log(result);
   sendResponse(res, {
     statusCode: 200,
     success: true,
